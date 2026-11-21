@@ -1,0 +1,14 @@
+{
+  "name": "fuego-austral",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio cinematográfico Fuego Austral — Brasa, Masa & Street Food (Santiago, Chile)",
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./css/tailwind.input.css -o ./css/tailwind.css --watch",
+    "start": "npx --yes serve -l 5173 ."
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.16"
+  }
+}

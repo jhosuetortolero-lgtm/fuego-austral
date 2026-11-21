@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fuego Austral — Brasa, Masa & Street Food · Santiago, Chile</title>
+  <meta name="description" content="Fuego Austral: smash burgers al carbón, pizzas a la leña y completos de autor en Providencia, Santiago. Brasa viva. Sabor sin filtros.">
+  <meta name="theme-color" content="#0A0A0B">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fuego Austral — Brasa, Masa & Street Food">
+  <meta property="og:description" content="Smash burgers al carbón, pizzas a la leña y completos de autor. Av. Providencia 2145, Santiago.">
+  <meta property="og:locale" content="es_CL">
+  <link rel="canonical" href="https://jhosuetortolero-lgtm.github.io/fuego-austral/">
+  <meta property="og:url" content="https://jhosuetortolero-lgtm.github.io/fuego-austral/">
+  <meta property="og:image" content="https://jhosuetortolero-lgtm.github.io/fuego-austral/public/brand/og-image.jpg">
+  <meta name="twitter:image" content="https://jhosuetortolero-lgtm.github.io/fuego-austral/public/brand/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Impede o navegador de restaurar o scroll: a sequência sempre abre no frame 0001 -->
+  <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="./public/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="./public/brand/apple-touch-icon.png">
+
+  <!-- Prioridade máxima: frame 0001 e emblema aparecem antes de tudo -->
+  <link rel="preload" as="image" href="./public/frames/frame_0001.webp" fetchpriority="high" media="(min-width: 768px)">
+  <link rel="preload" as="image" href="./public/frames-mobile/frame_0001.webp" fetchpriority="high" media="(max-width: 767px)">
+  <link rel="preload" as="image" href="./public/brand/logo-emblem.webp">
+
+  <!-- Tipografia: Anton (impacto) + Plus Jakarta Sans (texto e cardápio) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos: componentes da marca + Tailwind compilado (npm run build:css; config em tailwind.config.js) -->
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/tailwind.css">
+  <noscript><style>.loader{display:none}html.is-locked{overflow:auto}</style></noscript>
+</head>
+
+<body class="bg-obsidian font-sans text-bone antialiased">
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- Textura de grão de película (decorativa) -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- =====================================================================
+       LOADER — barra de progresso dos primeiros frames
+       ===================================================================== -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <img class="loader__mark" src="./public/brand/logo-emblem.webp" width="318" height="320" alt="">
+      <p class="loader__brand">Fuego Austral</p>
+      <div class="loader__bar" aria-hidden="true"><span id="loader-bar"></span></div>
+      <div class="loader__meta">
+        <span>Encendiendo la brasa</span>
+        <span id="loader-pct">000%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       HEADER fixo
+       ===================================================================== -->
+  <header id="site-header" class="site-header">
+    <div class="site-header__inner">
+      <a href="#top" class="logo" data-scroll-to aria-label="Fuego Austral — volver al inicio">
+        <img class="logo__mark" src="./public/brand/logo-emblem.webp" width="318" height="320" alt="">
+        <span class="logo__text">
+          <span class="logo__word">Fuego Austral</span>
+          <span class="logo__tag">Brasa · Masa · Street Food</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:block" aria-label="Principal">
+        <ul class="flex items-center gap-10">
+          <li><a class="nav-link" href="#la-brasa" data-scroll-to>La Brasa</a></li>
+          <li><a class="nav-link" href="#la-carta" data-scroll-to>La Carta</a></li>
+          <li><a class="nav-link" href="#santiago" data-scroll-to>Santiago</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="cart-toggle" class="icon-btn" type="button" aria-controls="cart-drawer" aria-expanded="false" aria-label="Abrir tu pedido">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/>
+            <path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>
+          </svg>
+          <span id="cart-count" class="cart-badge" hidden>0</span>
+        </button>
+        <a href="#la-carta" data-scroll-to class="btn btn--primary hidden sm:inline-flex"><span>Pedir Ahora</span></a>
+        <button id="menu-toggle" class="menu-btn md:hidden" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu móvel (tela cheia) -->
+  <div id="mobile-menu" class="mobile-menu" inert>
+    <nav aria-label="Menú móvil">
+      <ul class="mobile-menu__list">
+        <li><a href="#la-brasa" data-scroll-to class="mobile-link"><span class="mobile-link__idx">01</span><span class="mobile-link__label">La Brasa</span></a></li>
+        <li><a href="#la-carta" data-scroll-to class="mobile-link"><span class="mobile-link__idx">02</span><span class="mobile-link__label">La Carta</span></a></li>
+        <li><a href="#santiago" data-scroll-to class="mobile-link"><span class="mobile-link__idx">03</span><span class="mobile-link__label">Santiago</span></a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu__foot">
+      <p>Av. Providencia 2145, Santiago<br><span class="text-[color:var(--faint)]">Abierto todas las noches desde las 19:00</span></p>
+      <a href="#la-carta" data-scroll-to class="btn btn--primary"><span>Pedir Ahora</span></a>
+    </div>
+  </div>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- ===================================================================
+         HERO — 400vh pinned + canvas com scroll-scrubbing (94 frames)
+         =================================================================== -->
+    <section id="top" class="hero" aria-label="Fuego Austral, secuencia cinematográfica">
+      <div class="hero__stage">
+        <canvas id="hero-canvas" class="hero__canvas" role="img" aria-label="Hamburguesa doble smash armándose capa por capa entre brasas, chispas y humo"></canvas>
+        <div class="hero__shade" aria-hidden="true"></div>
+
+        <!-- Bloco 1 · 0% → 25% -->
+        <div class="story-block story-block--1">
+          <p class="story-kicker" data-fade><span class="story-kicker__dot"></span>01 — Providencia, Santiago</p>
+          <h1 class="story-title">
+            <span class="line"><span class="line-inner">Fuego</span></span>
+            <span class="line"><span class="line-inner text-grad">Austral</span></span>
+          </h1>
+          <p class="story-sub" data-fade>Brasa viva. Sabor sin filtros.</p>
+        </div>
+
+        <!-- Bloco 2 · 35% → 60% -->
+        <div class="story-block story-block--2">
+          <p class="story-kicker" data-fade><span class="story-kicker__dot"></span>02 — La Técnica</p>
+          <h2 class="story-title">
+            <span class="line"><span class="line-inner">Doble</span></span>
+            <span class="line"><span class="line-inner">Smash &amp;</span></span>
+            <span class="line"><span class="line-inner text-outline">Brioche</span></span>
+          </h2>
+          <p class="story-sub" data-fade>Carne madurada sellada a 300°C sobre carbón patagónico.</p>
+        </div>
+
+        <!-- Bloco 3 · 70% → 95% -->
+        <div class="story-block story-block--3">
+          <p class="story-kicker" data-fade><span class="story-kicker__dot"></span>03 — El Origen</p>
+          <h2 class="story-title">
+            <span class="line"><span class="line-inner">Alma</span></span>
+            <span class="line"><span class="line-inner text-grad">Chilena</span></span>
+          </h2>
+          <p class="story-sub" data-fade>Palta fresca molida al momento y salsas de autor.</p>
+        </div>
+
+        <!-- HUD cinematográfico -->
+        <div class="hero-hud" aria-hidden="true">
+          <div id="scroll-hint" class="scroll-hint">
+            <div class="scroll-hint__inner"><span class="scroll-hint__line"></span><span>Desliza para encender</span></div>
+          </div>
+          <div class="hud-right">
+            <span class="hud-coords">33°27′S · 70°40′O</span>
+            <div class="hud-counter"><span id="frame-counter">001</span><span class="hud-counter__total">/ 094</span></div>
+            <div class="hud-progress"><span id="hero-progress"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         NUESTRA FILOSOFÍA (La Brasa) — editorial assimétrico
+         =================================================================== -->
+    <section id="la-brasa" class="section" aria-labelledby="filosofia-title">
+      <div class="wrap">
+        <div class="grid grid-cols-12 gap-x-6 gap-y-8">
+          <div class="col-span-12 md:col-span-3">
+            <p class="kicker" data-reveal>02 — Nuestra Filosofía</p>
+          </div>
+          <h2 id="filosofia-title" class="manifesto col-span-12 md:col-span-9" data-split>
+            No hacemos comida rápida. Hacemos comida a <em>fuego vivo.</em> La brasa manda, la masa espera y la palta se muele <em>al momento.</em>
+          </h2>
+        </div>
+
+        <div class="mt-20 grid grid-cols-12 gap-x-6 gap-y-14 md:mt-36">
+          <figure class="philo-figure col-span-12 md:col-span-6 lg:col-span-5">
+            <div class="philo-figure__frame">
+              <img class="philo-figure__img" src="./public/frames/frame_0072.webp" width="1920" height="1080" loading="lazy" decoding="async"
+                   alt="Hamburguesa doble smash con cheddar fundido, tocino y palta entre chispas de brasa">
+            </div>
+            <figcaption class="philo-figure__cap"><span>Fig. 01</span> Doble smash, cheddar fundido y palta Hass.</figcaption>
+          </figure>
+
+          <div class="col-span-12 flex flex-col justify-end gap-8 md:col-span-5 md:col-start-8">
+            <p class="lead" data-reveal>
+              Nacimos en una esquina de Providencia con una parrilla prestada y una obsesión: que cada mordida supiera a carbón de verdad.
+              Hoy seguimos igual — carne madurada en casa, masa madre que fermenta dos días y completos armados como corresponde, sin atajos.
+            </p>
+            <p class="signature" data-reveal>— La cocina de Fuego Austral</p>
+          </div>
+        </div>
+
+        <ul class="stats mt-24 grid grid-cols-12 gap-x-6 gap-y-16 md:mt-40">
+          <li class="stat col-span-12 md:col-span-4">
+            <span class="stat__rule" aria-hidden="true"></span>
+            <p class="stat__index">I.</p>
+            <p class="stat__value"><span data-count="300">300</span><span class="stat__unit">°C</span></p>
+            <h3 class="stat__label">Brasa Viva</h3>
+            <p class="stat__text">Carbón de espino y leña de lenga patagónica. Sellado intenso por fuera, jugo por dentro.</p>
+          </li>
+          <li class="stat col-span-12 md:col-span-4 md:mt-28">
+            <span class="stat__rule" aria-hidden="true"></span>
+            <p class="stat__index">II.</p>
+            <p class="stat__value"><span data-count="100">100</span><span class="stat__unit">%</span></p>
+            <h3 class="stat__label">Palta Hass</h3>
+            <p class="stat__text">Del valle de Quillota, molida al momento para cada pedido. Nunca en pasta, nunca del día anterior.</p>
+          </li>
+          <li class="stat col-span-12 md:col-span-4 md:mt-56">
+            <span class="stat__rule" aria-hidden="true"></span>
+            <p class="stat__index">III.</p>
+            <p class="stat__value"><span data-count="48">48</span><span class="stat__unit">h</span></p>
+            <h3 class="stat__label">Fermentación</h3>
+            <p class="stat__text">Masa madre de 48 horas para pizzas aireadas, crocantes y livianas, horneadas a la leña.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Faixa marquee (velocidade reage ao scroll) -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>Smash al carbón</span><i>✦</i>
+          <span class="is-outline">Masa madre 48h</span><i>✦</i>
+          <span>Completos de autor</span><i>✦</i>
+          <span class="is-outline">Palta Hass</span><i>✦</i>
+          <span>Horno a leña</span><i>✦</i>
+          <span class="is-outline">Providencia, Santiago</span><i>✦</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         LA CARTA — filtros + cards (renderizados por js/main.js)
+         =================================================================== -->
+    <section id="la-carta" class="section" aria-labelledby="carta-title">
+      <div class="wrap">
+        <div class="grid grid-cols-12 items-end gap-x-6 gap-y-8">
+          <div class="col-span-12 lg:col-span-7">
+            <p class="kicker" data-reveal>03 — La Carta</p>
+            <h2 id="carta-title" class="display-xl" data-reveal>La Carta</h2>
+          </div>
+          <div class="col-span-12 lg:col-span-4 lg:col-start-9">
+            <p class="lead-sm" data-reveal>Seis platos, cero relleno. Todo sale de la brasa o del horno a leña, armado al momento en Providencia.</p>
+            <p class="note" data-reveal>Precios en pesos chilenos (CLP) · IVA incluido</p>
+          </div>
+        </div>
+
+        <div class="filters-wrap" data-reveal>
+          <div id="menu-filters" class="filters" role="group" aria-label="Filtrar La Carta por categoría">
+            <span class="filters__pill" aria-hidden="true"></span>
+            <button type="button" class="filter is-active" data-filter="all" aria-pressed="true">Todos <sup>00</sup></button>
+            <button type="button" class="filter" data-filter="smash" aria-pressed="false">Smash Burgers <sup>00</sup></button>
+            <button type="button" class="filter" data-filter="pizza" aria-pressed="false">Pizzas a la Leña <sup>00</sup></button>
+            <button type="button" class="filter" data-filter="completo" aria-pressed="false">Completos Chilenos <sup>00</sup></button>
+          </div>
+        </div>
+
+        <p id="menu-status" class="sr-only" aria-live="polite"></p>
+        <div id="menu-grid" class="menu-grid"></div>
+        <noscript><p class="lead-sm mt-10">Activa JavaScript para ver La Carta y hacer tu pedido. También puedes llamarnos al +56 9 5555 2145.</p></noscript>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       FOOTER cinematográfico
+       ===================================================================== -->
+  <footer id="santiago" class="footer" aria-labelledby="footer-title">
+    <div class="wrap">
+      <div class="footer__cta">
+        <img class="footer__logo" src="./public/brand/logo-full.webp" width="747" height="1000" loading="lazy" decoding="async"
+             alt="Fuego Austral — Brasa, Masa & Street Food, Santiago, Chile">
+        <div>
+          <p class="kicker" data-reveal>04 — Santiago</p>
+          <h2 id="footer-title" class="footer__title" data-reveal>¿Hambre de verdad?<br><span class="text-grad">Te esperamos esta noche.</span></h2>
+          <a href="#la-carta" data-scroll-to class="btn btn--primary btn--lg mt-10"><span>Pedir Ahora</span></a>
+        </div>
+      </div>
+
+      <div class="footer__grid">
+        <div class="footer__col" data-reveal>
+          <h3 class="footer__label">Dónde</h3>
+          <p>Av. Providencia 2145<br>Providencia, Santiago</p>
+          <p class="footer__muted">A pasos del Metro Los Leones (L1)</p>
+          <a class="footer__link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Providencia+2145,+Providencia,+Santiago" target="_blank" rel="noopener">Cómo llegar ↗</a>
+        </div>
+
+        <div class="footer__col" data-reveal>
+          <h3 class="footer__label">Horarios</h3>
+          <ul class="hours" id="hours">
+            <li data-days="1,2,3"><span>Lun – Mié</span><span>19:00 – 00:00</span></li>
+            <li data-days="4,5,6"><span>Jue – Sáb</span><span>19:00 – 02:30</span></li>
+            <li data-days="0"><span>Domingo</span><span>18:00 – 23:00</span></li>
+          </ul>
+          <p id="open-status" class="open-status"><span class="open-status__dot"></span><span class="open-status__text">Hora de Santiago</span></p>
+        </div>
+
+        <div class="footer__col" data-reveal>
+          <h3 class="footer__label">Contacto</h3>
+          <p><a class="footer__link" href="tel:+56955552145">+56 9 5555 2145</a></p>
+          <p><a class="footer__link" href="mailto:hola@fuegoaustral.cl">hola@fuegoaustral.cl</a></p>
+          <p class="footer__muted">Retiro en local y delivery en Providencia y Ñuñoa.</p>
+        </div>
+
+        <div class="footer__col" data-reveal>
+          <h3 class="footer__label">Síguenos</h3>
+          <!-- Trocar por <a href="https://instagram.com/..."> quando os perfis existirem -->
+          <p>Instagram · <span class="text-bone">@fuegoaustral</span></p>
+          <p>TikTok · <span class="text-bone">@fuegoaustral</span></p>
+          <button type="button" class="footer__top" id="back-to-top">Volver arriba ↑</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipografia gigante: ajustada à largura da tela por JS (fitGiant) -->
+    <div class="giant" aria-hidden="true">
+      <span id="giant-word" class="giant__word">Fuego Austral</span>
+    </div>
+
+    <div class="wrap footer__bottom">
+      <p>© 2026 Fuego Austral · Marca ficticia — proyecto de portafolio.</p>
+      <p>Dirección de arte &amp; desarrollo frontend · Secuencia de 94 fotogramas · GSAP, Lenis &amp; Tailwind.</p>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       CARRINHO LATERAL (drawer)
+       ===================================================================== -->
+  <div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
+  <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" inert>
+    <header class="cart-drawer__head">
+      <div>
+        <p class="kicker">Pedido rápido</p>
+        <h2 id="cart-title" class="cart-drawer__title">Tu Pedido <span id="cart-head-count" class="cart-drawer__count">0</span></h2>
+      </div>
+      <button type="button" class="icon-btn" data-cart-close aria-label="Cerrar pedido">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+
+    <!-- Vista: carrinho -->
+    <div id="cart-view" class="cart-view">
+      <div class="cart-drawer__body" data-lenis-prevent>
+        <ul id="cart-items" class="cart-items"></ul>
+        <div id="cart-empty" class="cart-empty" hidden>
+          <span class="cart-empty__icon" aria-hidden="true">✦</span>
+          <p class="cart-empty__title">Tu pedido está vacío</p>
+          <p class="cart-empty__text">La brasa ya está encendida. Elige algo de La Carta.</p>
+          <button type="button" class="btn btn--ghost" data-goto-carta><span>Ver La Carta</span></button>
+        </div>
+      </div>
+      <footer id="cart-summary" class="cart-drawer__foot">
+        <dl class="cart-totals">
+          <div><dt>Subtotal</dt><dd id="cart-subtotal">$0</dd></div>
+          <div><dt>Retiro en local</dt><dd class="text-ember">Gratis</dd></div>
+          <div class="cart-totals__total"><dt>Total</dt><dd id="cart-total">$0</dd></div>
+        </dl>
+        <button type="button" id="cart-checkout" class="btn btn--primary btn--block btn--lg"><span>Confirmar Pedido</span></button>
+        <p class="cart-note">Retiro en Av. Providencia 2145 · Listo en 20–25 min · Demo de portafolio: no se procesan pagos.</p>
+      </footer>
+    </div>
+
+    <!-- Vista: pedido confirmado -->
+    <div id="cart-success" class="cart-success" hidden>
+      <span class="cart-success__icon" aria-hidden="true">✓</span>
+      <p class="kicker">Pedido confirmado</p>
+      <p class="cart-success__title">¡Tu pedido ya está en la brasa!</p>
+      <p class="cart-success__order">N° <strong id="order-number">FA-0000</strong></p>
+      <p class="cart-success__text">Retíralo en Av. Providencia 2145 en unos 25 minutos. Total a pagar en caja: <strong id="order-total">$0</strong>.</p>
+      <button type="button" class="btn btn--ghost" data-cart-close><span>Seguir explorando</span></button>
+    </div>
+  </aside>
+
+  <!-- =====================================================================
+       Scripts: GSAP + ScrollTrigger + Flip, Lenis, dados e app
+       ===================================================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="./js/data.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

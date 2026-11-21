@@ -50,3 +50,21 @@
 | Desempenho em rede móvel real | Não medido | 4,4 MB de frames no celular | Medir com Lighthouse/WebPageTest após publicar |
 | Safari, Firefox, leitor de tela | Não testado | Desconhecido | Testar antes de entregar a cliente |
 | Dados de exemplo (telefone 5555, e-mail, redes) | Intencional | Marca fictícia | Substituir se virar marca real |
+
+## Revisão mobile — 2026-11-21
+
+**Ambiente:** Playwright 1.65 · Chrome (Pixel 7 / iPhone 13 emulados, toque real via CDP) + WebKit 26
+(motor do Safari) em retrato e paisagem (iPhone SE, iPhone 13, iPhone 13 Pro Max, Pixel 7).
+
+| # | Prioridade | Achado | Correção | Reteste |
+|---|---|---|---|---|
+| 15 | Alta | Dois toques rápidos no ☰ deixavam o menu invisível com a página travada | Animação anterior cancelada antes da próxima (`anim.kill()`), títulos com `fromTo` | Abrir/fechar/abrir em 150 ms: menu visível, links no lugar (Chrome e WebKit) |
+| 16 | Alta | Barra de endereço do celular sumindo disparava `ScrollTrigger.refresh()` → o hambúrguer pulava de frame | `resize` só recalcula quando a **largura** muda | Altura +60 px: frame 057 → 057 (antes 057 → 052) |
+| 17 | Média | Celular deitado: título do hero subia por cima do logo; menu cortava "Pedir Ahora" | Tipografia do hero proporcional à altura (`vh`) + menu com rolagem própria | Kicker sempre abaixo do header nos 4 aparelhos; menu rola |
+| 18 | Média | `:hover` "grudava" após o toque (botão laranja, card levantado); toque duplo no "+" dava zoom no iPhone | Hover só em `@media (hover: hover)`, `touch-action: manipulation`, feedback em `:active` | 2 toques rápidos no "+": qty 1 → 3, sem zoom |
+| 19 | Média | Filtro "Completos Chilenos" ficava cortado na borda | Filtro escolhido é centralizado na barra | Pílula alinhada ao botão, botão inteiro visível |
+| 20 | Baixa | Arrastar no carrinho/menu podia rolar a página de fundo | `overscroll-behavior: contain` + `touch-action: none` no fundo escuro | Toque real: página parada, lista do carrinho rola |
+| 21 | Baixa | iPhone com notch/home indicator (`viewport-fit=cover`) | `env(safe-area-inset-*)` no gutter, rodapé, carrinho e menu | — (sem aparelho físico) |
+| 22 | Baixa | Safari < 16.2 descartava o fundo dos cards (`color-mix`) | Fundo de fallback antes | — |
+
+Desktop (1440×900) retestado sem regressão: hover dos cards/botões/filtros, filtro, carrinho, resize.

@@ -420,7 +420,9 @@
     const panel = $('#mobile-menu');
     const toggle = $('#menu-toggle');
     const header = $('#site-header');
+    const labels = $$('.mobile-link__label', panel);
     let open = false;
+    let anim = null; // animação de abrir/fechar em andamento
 
     function show() {
       if (open) return;
@@ -432,10 +434,13 @@
       toggle.setAttribute('aria-label', 'Cerrar menú');
       panel.inert = false;
       setBackgroundInert(true);
-      gsap.timeline()
+      // Toques rápidos no celular: cancela o fechamento em andamento,
+      // senão o onComplete dele escondia o menu já aberto (tela travada e vazia)
+      anim?.kill();
+      anim = gsap.timeline()
         .set(panel, { visibility: 'visible' })
         .to(panel, { clipPath: 'inset(0% 0% 0% 0%)', duration: prefersReducedMotion ? 0 : 0.8, ease: 'expo.inOut' })
-        .from($$('.mobile-link__label', panel), { yPercent: 110, duration: prefersReducedMotion ? 0 : 0.9, stagger: 0.07, ease: 'expo.out' }, '-=0.35');
+        .fromTo(labels, { yPercent: 110 }, { yPercent: 0, duration: prefersReducedMotion ? 0 : 0.9, stagger: 0.07, ease: 'expo.out' }, '-=0.35');
     }
 
     function close() {
@@ -446,7 +451,8 @@
       toggle.setAttribute('aria-label', 'Abrir menú');
       panel.inert = true;
       setBackgroundInert(false);
-      gsap.to(panel, {
+      anim?.kill();
+      anim = gsap.to(panel, {
         clipPath: 'inset(0% 0% 100% 0%)',
         duration: prefersReducedMotion ? 0 : 0.7,
         ease: 'expo.inOut',
@@ -457,7 +463,11 @@
 
     toggle?.addEventListener('click', () => (open ? close() : show()));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-    window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => { if (e.matches) close(); });
+    const desktopMq = window.matchMedia('(min-width: 768px)');
+    const onDesktop = (e) => { if (e.matches) close(); };
+    // Safari < 14 só tem addListener: sem o fallback o script inteiro parava
+    if (desktopMq.addEventListener) desktopMq.addEventListener('change', onDesktop);
+    else desktopMq.addListener(onDesktop);
 
     return { close, get isOpen() { return open; } };
   })();
@@ -688,6 +698,20 @@
       });
     }
 
+    /* Celular: a barra de filtros rola na horizontal → centraliza o filtro escolhido
+       (senão "Completos Chilenos" fica cortado na borda da tela) */
+    function revealActiveFilter() {
+      const wrap = filtersEl.parentElement;
+      const btn = buttons.find((b) => b.dataset.filter === current);
+      if (!wrap || !btn || wrap.scrollWidth <= wrap.clientWidth + 1) return;
+      const w = wrap.getBoundingClientRect();
+      const b = btn.getBoundingClientRect();
+      const delta = (b.left + b.width / 2) - (w.left + w.width / 2);
+      if (Math.abs(delta) < 2) return;
+      if (typeof wrap.scrollBy === 'function') wrap.scrollBy({ left: delta, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      else wrap.scrollLeft += delta;
+    }
+
     function applyFilter(filter) {
       if (filter === current) return;
       current = filter;
@@ -697,6 +721,7 @@
         b.setAttribute('aria-pressed', String(on));
       });
       movePill();
+      revealActiveFilter();
 
       const cards = $$('.menu-card', grid);
       const matches = (card) => filter === 'all' || card.dataset.category === filter;
@@ -1117,7 +1142,13 @@
     initFooter();
     ScrollTrigger.refresh();
 
+    // No celular a barra de endereço some/aparece ao rolar e dispara "resize" só com
+    // mudança de altura: recalcular aí fazia o filme do hero pular de frame.
+    // Altura sozinha o próprio ScrollTrigger já trata (ignoreMobileResize).
+    let lastWidth = window.innerWidth;
     window.addEventListener('resize', debounce(() => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
       fitGiant();
       Menu.movePill(true);
       ScrollTrigger.refresh();

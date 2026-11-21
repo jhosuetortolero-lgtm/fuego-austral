@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/brand/logo-full.webp" alt="Fuego Austral — Brasa, Masa & Street Food" width="190">
+<img src="docs/readme-banner.png" alt="Fuego Austral — Brasa, Masa & Street Food · Santiago, Chile" width="100%">
 
 # Fuego Austral
 
@@ -187,7 +187,7 @@ filtros. Achados, evidências e correções em [`docs/auditoria-site.md`](docs/a
 
 <div align="center">
 
-<img src="public/brand/logo-emblem.webp" alt="" width="56">
+<img src="docs/emblem-badge.png" alt="" width="64">
 
 **Fuego Austral** é uma marca fictícia criada para portfólio.<br>
 Telefone, e-mail e redes sociais exibidos no site são exemplos.
